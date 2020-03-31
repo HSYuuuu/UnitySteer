@@ -1,35 +1,35 @@
-# UnitySteer 3.1
+# Gitbook 介绍 · Study Record
 
-## General notes
+最近在写小组的论文，那就免不了会涉及到团队编辑文档。本来打算是开一个 pages 然后协作共享出来一起改，但是目前小组的机器情况是 2Win+2Mac，虽然 pages 目前也支持网页版的了，然而本地环境的使用体验还是会比网页版的好很多。还有一个要考虑的问题就是这种文档内\(pages/word\)的编辑很难做到版本控制，万一一不小心一个剪刀手，好吧还是不要毒奶。
 
-UnitySteer is a toolkit to help build steering behaviors for autonomous agents in Unity. Initially based on OpenSteer, UnitySteer has been significantly reworked since it was first translated - the concepts and some of the code remain the same, but it follows a more Unity-like component-oriented philosophy.
+经过考虑，后来决定选型协同编辑环境为`Git+Markdown`,为什么这么选主要有以下几个方面的思考。
 
-Please read License.txt before using in your projects. It's short, sweet and to the point.
+1. 可以利用 git 的版本控制，每次 commit 的记录都可以找得到，不用担心内容的丢失。
+2. 组内 Review 起来方便，只要其他成员 push 之后都会有邮件提醒，可以看到成员具体改动的地方在哪里。
+3. 本地编辑时不需要网络环境 \(相对于文档在线协同编辑\) 。
+4. 由于共用一个 repo，组间分享的各种资料也可以放上来。
+5. 可以让大家熟悉一下这两个工具，上手简单而且好用。
+6. md 格式的写作让大家更加关注内容本身，而不用太在意排版。
 
-## Main repository
+但是这么做也会带来一些弊端
 
-If you have obtained this library from a third party, [you can always find the latest version on Github](https://github.com/ricardojmendez/UnitySteer).
+第一就是如果是论文格式排版有要求的话，md 最后转 pdf 的话很难做的到，经过取舍是编辑完成后，最后一起开个 pages 文档协同合进去\(pages 支持 Katex 公式，word 不行\)。
 
-## Tutorials and examples
+第二就是如果大家一起编辑一个 md 文件的话，每次 push 都必然会产生冲突，解决办法就是拆分 md 文件，把每个人负责的内容的部分单独抽出来成单独的 md 文件，降低耦合。
 
-Looking for a UnitySteer tutorial? The [UnitySteer Examples](https://github.com/ricardojmendez/UnitySteerExamples) repository contains a series of examples and experimentation notes for you to teach yourself the library basics and how to compose your own agents.
+第三在 vscode 里编辑的时候是没有英文的拼写和语法检查的，合进 pages 的时候一段话 6、7 个拼写错误也不是没可能的。。。 \(后来发现 vscode 里拼写检查可以用`Code Spell Checker`或者`SpellRight`插件\)
 
-## Dependencies
+在最后生成 pdf 这一步觉得手动去合并每个 md 文件效率太低了，然后找了一下发现了`Gitbook`这个使用 `Git` 和 `Markdown` 来构建书籍的工具。输出的格式有很多种:PDF，ePub，mobi，或者输出为静态网页。
 
-UnitySteer uses [TickedPriorityQueue](https://github.com/Garufortho/TickedPriorityQueue). The latest library is now included on this repository.
+## 环境要求 <a id="&#x73AF;&#x5883;&#x8981;&#x6C42;"></a>
 
-UnitySteer 3.1 requires Unity 5.x for 2D support. The last version to support Unity 4.x was [UnitySteer 3.0](https://github.com/ricardojmendez/UnitySteer/tree/v3.0.0).
+NodeJS\(v4.0.0 及以上\)
 
-## Stable and beta versions
+### Mac <a id="mac"></a>
 
-The current stable release is UnitySteer 3.0 RC2. It contains a significant number of improvements and fixes over 2.7, but it also introduced several breaking changes, so make sure you catch up with [the latest UnitySteer blogposts](http://arges-systems.com/blog/category/unitysteer/), as well as reading the [changelog]().
+```text
+npm install gitbook-cli -g
+```
 
-I develop UnitySteer following git-flow, so if you're looking for a specific version, you can look at the project tags:
-
-* [UnitySteer 3.0](https://github.com/ricardojmendez/UnitySteer/tree/v3.0.0)
-* [UnitySteer 2.7](https://github.com/ricardojmendez/UnitySteer/tree/v2.7)
-
-## UnitySteer and iOS
-
-If you are using UnitySteer on iOS, bear in mind that you may need to search for and change any LINQ calls, since Unity has a penchant for not AOT'ing them properly.
+刚开始在生成 pdf 的时候发现构建的时候总是会卡死，后来发现在**安装 calibre 的时候要记得选 3.X 版本**的
 
